@@ -3,6 +3,9 @@
 <title>Yahoo!!</title>
 </head>
 <body>
-Welcome ${name} and ${password}
+Welcome ${name} <br/>
+
+Your todos: <a href="/list-todos">goto</a>
+
 </body>
 </html>
