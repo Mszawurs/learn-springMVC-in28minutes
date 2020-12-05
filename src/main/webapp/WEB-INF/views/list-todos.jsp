@@ -19,6 +19,7 @@ Hi ${name}, todos number: ${number} <br/>
 <th>Description</th>
 <th>Target date</th>
 <th>Is completed?</th>
+<th>Action</th>
 </tr> 
 </thead>
 
@@ -28,6 +29,7 @@ Hi ${name}, todos number: ${number} <br/>
 <td>${todo.desc}</td>
 <td>${todo.targetDate}</td>
 <td>${todo.done}</td>
+<td><a href="/delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a></td>
 </tr> 
 </c:forEach>
 </tbody>
