@@ -1,6 +1,7 @@
 package webapp.todo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.validation.constraints.Size;
 
@@ -11,7 +12,7 @@ public class Todo {
 	
 	@Size(min=6, message="Enter at least 6 characters")
 	private String desc;
-	private LocalDate targetDate;
+	private Date targetDate;
 	private boolean isDone;
 	
 	public int getId() {
@@ -32,10 +33,10 @@ public class Todo {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public LocalDate getTargetDate() {
+	public Date getTargetDate() {
 		return targetDate;
 	}
-	public void setTargetDate(LocalDate targetDate) {
+	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
 	}
 	public boolean isDone() {
@@ -70,7 +71,7 @@ public class Todo {
 			return false;
 		return true;
 	}
-	public Todo(int id, String user, String desc, LocalDate targetDate, boolean isDone) {
+	public Todo(int id, String user, String desc, Date targetDate, boolean isDone) {
 		super();
 		this.id = id;
 		this.user = user;

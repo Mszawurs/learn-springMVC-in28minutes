@@ -1,11 +1,10 @@
-<html>
-<head>
-<title>Yahoo!!</title>
-</head>
-<body>
+<%@ include file="common/header.jspf"%>
+<%@ include file="common/navigation.jspf"%>
+
+<div class="container">
 Welcome ${name} <br/>
 
 Your todos: <a href="/list-todos">goto</a>
 
-</body>
-</html>
+</div>
+<%@ include file="common/footer.jspf"%>

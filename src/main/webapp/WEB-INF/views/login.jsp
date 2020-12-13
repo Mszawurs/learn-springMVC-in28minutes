@@ -1,8 +1,7 @@
-<html>
-<head>
-<title>Yahoo!!</title>
-</head>
-<body>
+<%@ include file="common/header.jspf"%>
+<%@ include file="common/navigation.jspf"%>
+
+<div class="container">
     <p><font color="red">${errorMessage}</font></p>
     <form action="/login" method="POST">
         Name : <input name="name" type="text" /> 
@@ -10,6 +9,6 @@
         <input type="submit" value="Wysylaj"/>
     </form>
     
-   
-</body>
-</html>
+</div>
+
+<%@ include file="common/footer.jspf"%>
