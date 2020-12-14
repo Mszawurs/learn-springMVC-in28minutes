@@ -4,15 +4,21 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +26,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import webapp.exception.ExceptionController;
+
 @Controller
 @SessionAttributes("name")
 public class TodoController {
+
+	private Log logger = LogFactory.getLog(ExceptionController.class);
 
 	@Autowired
 	TodoService service;
@@ -35,15 +45,26 @@ public class TodoController {
 	
 	@RequestMapping(value="/list-todos", method=RequestMethod.GET)
 	public String listTodos(ModelMap model) {
-		model.addAttribute("todos", service.retrieveTodos("abba"));
+		model.addAttribute("todos", service.retrieveTodos(retrieveLoggedInUserName()));
 		model.addAttribute("number", service.getTodoCount());
 		return "list-todos";
 	}
 	
+	private String retrieveLoggedInUserName() {
+		Object principal = SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		
+		if (principal instanceof UserDetails)
+			return ((UserDetails) principal).getUsername();
+		
+		return principal.toString();
+	}
+	
 	@RequestMapping(value="/add-todo", method=RequestMethod.GET)
 	public String showTodoPage(ModelMap model) {
-		model.addAttribute("todo", new Todo(0, "abba", "default", new Date(), false));
-		return "todo";
+		throw new RuntimeException("eeeee");
+		//model.addAttribute("todo", new Todo(0, retrieveLoggedInUserName(), "default", new Date(), false));
+		//return "todo";
 	}
 	
 	@RequestMapping(value="/add-todo", method=RequestMethod.POST)
@@ -52,7 +73,7 @@ public class TodoController {
 			return "todo";
 		}
 		
-		service.addTodo("abba", todo.getDesc(), new Date(), false);
+		service.addTodo(retrieveLoggedInUserName(), todo.getDesc(), new Date(), false);
 		model.clear();
 		return "redirect:list-todos";
 	}
@@ -69,7 +90,7 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-	todo.setUser("abba");
+	todo.setUser(retrieveLoggedInUserName());
 		
 		service.updateTodo(todo);
 		model.clear();
@@ -82,5 +103,10 @@ public class TodoController {
 		return "redirect:list-todos";
 	}
 	
+	@ExceptionHandler(value = Exception.class)
+	public String handleException(HttpServletRequest request, Exception e) {
+		logger.error("Request " + request.getRequestURI() + " threw an exception", e);
+		return "error-specific";
+	}
 	
 }

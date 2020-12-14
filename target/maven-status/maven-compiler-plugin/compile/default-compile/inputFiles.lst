@@ -1,5 +1,8 @@
-C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\login\LoginController.java
 C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\todo\TodoController.java
+C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\security\SecurityConfiguration.java
 C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\todo\Todo.java
-C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\login\UserValidationService.java
+C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\todo\TodoRestController.java
+C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\login\WelcomeController.java
+C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\login\LogoutController.java
 C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\todo\TodoService.java
+C:\Users\marta\eclipse-workspace\first-web-applicationCH3\src\main\java\webapp\exception\ExceptionController.java
